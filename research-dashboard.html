@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Research Dashboard - September 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #e0e6f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .dashboard-header {
+            background: rgba(26, 31, 58, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px 40px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.5s ease;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 2em;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .date-badge {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .error-banner {
+            display: none;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #fecaca;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .error-banner.active {
+            display: block;
+        }
+        
+        .sentiment-overview {
+            background: rgba(26, 31, 58, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .sentiment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .sentiment-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .sentiment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+        
+        .sentiment-label {
+            font-size: 0.85em;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+        
+        .sentiment-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #6366f1;
+        }
+        
+        .allocation-chart {
+            background: rgba(26, 31, 58, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+        
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+        
+        .allocation-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .provider-insights {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .provider-card {
+            background: rgba(26, 31, 58, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .provider-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .provider-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .provider-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+        }
+        
+        .provider-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #8b5cf6;
+        }
+        
+        .key-insight {
+            background: rgba(99, 102, 241, 0.05);
+            border-left: 3px solid #6366f1;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .metric-card {
+            background: rgba(26, 31, 58, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .metric-label {
+            font-size: 0.85em;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+        
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .risk-monitor {
+            background: rgba(26, 31, 58, 0.6);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .risk-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .risk-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ef4444;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .risk-items {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .risk-item {
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 3px solid #ef4444;
+            padding: 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .risk-item:hover {
+            background: rgba(239, 68, 68, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            padding-bottom: 10px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            position: relative;
+        }
+        
+        .tab:hover {
+            color: #e0e6f0;
+        }
+        
+        .tab.active {
+            color: #6366f1;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -11px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #6366f1;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 30px;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .provider-insights {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body data-plan="master-plan_2025-09-29.md">
+    <div class="dashboard-header">
+        <div class="header-content">
+            <h1 id="dashboard-title"></h1>
+            <div class="date-badge" id="dashboard-date"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="dashboard-error" class="error-banner"></div>
+        <!-- Market Sentiment Overview -->
+        <div class="sentiment-overview">
+            <h2 class="section-title">Market Sentiment Overview</h2>
+            <div class="sentiment-grid" id="sentiment-grid"></div>
+        </div>
+
+        <!-- KISS Portfolio Allocation -->
+        <div class="allocation-chart">
+            <h2 id="allocation-title" class="section-title"></h2>
+            <div class="chart-container">
+                <canvas id="pieChart" class="pie-chart" width="200" height="200"></canvas>
+                <div id="allocation-legend" class="allocation-legend"></div>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <h2 class="section-title">Key Market Metrics</h2>
+        <div class="metrics-grid" id="metrics-grid"></div>
+
+        <!-- Provider Insights Tabs -->
+        <div class="tabs" id="provider-tabs"></div>
+        <div id="provider-contents"></div>
+
+        <!-- Risk Monitor -->
+        <div class="risk-monitor">
+            <div class="risk-header">
+                <div class="risk-indicator"></div>
+                <h2 class="section-title">Risk Monitor & Watch Items</h2>
+            </div>
+            <div class="risk-items" id="risk-items"></div>
+        </div>
+    </div>
+
+    <script>
+        const SOURCE_FILE = document.body.dataset.plan || 'master-plan_2025-09-29.md';
+
+        async function initDashboard() {
+            try {
+                const cacheBuster = (SOURCE_FILE.includes('?') ? '&' : '?') + 't=' + Date.now();
+                const response = await fetch(SOURCE_FILE + cacheBuster, { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error('Failed to load ' + SOURCE_FILE + ' (' + response.status + ')');
+                }
+
+                const text = await response.text();
+                const frontMatterMatch = text.match(/^---\s*([\s\S]*?)\s*---/);
+                if (!frontMatterMatch) {
+                    throw new Error('Dashboard configuration missing front matter.');
+                }
+
+                const config = JSON.parse(frontMatterMatch[1]);
+                applyDashboardData(config.dashboard || {});
+            } catch (error) {
+                console.error(error);
+                showError(error.message);
+            } finally {
+                applyCardAnimations();
+            }
+        }
+
+        function applyDashboardData(dashboard) {
+            if (dashboard.pageTitle) {
+                document.title = dashboard.pageTitle;
+            }
+
+            const titleEl = document.getElementById('dashboard-title');
+            if (titleEl) {
+                titleEl.textContent = dashboard.title || 'Investment Research Dashboard';
+            }
+
+            const dateEl = document.getElementById('dashboard-date');
+            if (dateEl) {
+                dateEl.textContent = dashboard.dateBadge || '';
+            }
+
+            renderSentimentCards(dashboard.sentimentCards || []);
+            renderAllocation(dashboard.allocation || {});
+            renderMetrics(dashboard.metrics || []);
+            renderProviderTabs(dashboard.tabs || []);
+            renderRiskItems(dashboard.riskItems || []);
+        }
+
+        function renderSentimentCards(cards) {
+            const grid = document.getElementById('sentiment-grid');
+            if (!grid) {
+                return;
+            }
+            grid.innerHTML = '';
+
+            if (!cards.length) {
+                grid.innerHTML = '<p style="color: #9ca3af;">No sentiment data available.</p>';
+                return;
+            }
+
+            cards.forEach(card => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'sentiment-card';
+                if (card.id) {
+                    cardEl.dataset.topic = card.id;
+                    cardEl.addEventListener('click', () => showDetail(card.id));
+                }
+
+                const labelEl = document.createElement('div');
+                labelEl.className = 'sentiment-label';
+                labelEl.textContent = card.label || '';
+
+                const valueEl = document.createElement('div');
+                valueEl.className = 'sentiment-value';
+                valueEl.textContent = card.value || '';
+
+                const detailEl = document.createElement('div');
+                detailEl.style.color = card.detailColor || '#e0e6f0';
+                detailEl.style.fontSize = '0.9em';
+                detailEl.style.marginTop = '5px';
+                detailEl.textContent = card.detail || '';
+
+                cardEl.appendChild(labelEl);
+                cardEl.appendChild(valueEl);
+                cardEl.appendChild(detailEl);
+
+                cardEl.addEventListener('mouseenter', () => {
+                    cardEl.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+
+                cardEl.addEventListener('mouseleave', () => {
+                    cardEl.style.transform = 'translateY(0) scale(1)';
+                });
+
+                grid.appendChild(cardEl);
+            });
+        }
+
+        function renderAllocation(allocation) {
+            const legend = document.getElementById('allocation-legend');
+            if (!legend) {
+                return;
+            }
+            legend.innerHTML = '';
+
+            const segments = Array.isArray(allocation.segments) ? allocation.segments : [];
+            const titleEl = document.getElementById('allocation-title');
+            if (titleEl) {
+                titleEl.textContent = allocation.title || 'Portfolio Allocation';
+            }
+
+            if (!segments.length) {
+                legend.innerHTML = '<p style="color: #9ca3af;">No allocation data available.</p>';
+                clearPieChart();
+                return;
+            }
+
+            segments.forEach(segment => {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+
+                const color = document.createElement('div');
+                color.className = 'legend-color';
+                color.style.background = segment.color || '#6366f1';
+
+                const label = document.createElement('div');
+                let value;
+                if (typeof segment.value === 'number') {
+                    value = segment.value + '%';
+                } else {
+                    value = segment.value;
+                }
+                label.textContent = segment.label ? segment.label + ': ' + value : value;
+
+                item.appendChild(color);
+                item.appendChild(label);
+                legend.appendChild(item);
+            });
+
+            drawPieChart(segments);
+        }
+
+        function clearPieChart() {
+            const canvas = document.getElementById('pieChart');
+            if (!canvas || !canvas.getContext) {
+                return;
+            }
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function drawPieChart(segments) {
+            const canvas = document.getElementById('pieChart');
+            if (!canvas || !canvas.getContext) {
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 10;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!segments || !segments.length) {
+                return;
+            }
+
+            let total = 0;
+            segments.forEach(segment => {
+                if (typeof segment.value === 'number') {
+                    total += segment.value;
+                } else {
+                    const numericValue = parseFloat(segment.value);
+                    if (!Number.isNaN(numericValue)) {
+                        total += numericValue;
+                    }
+                }
+            });
+            if (total <= 0) {
+                total = 1;
+            }
+
+            let currentAngle = -Math.PI / 2;
+
+            segments.forEach(segment => {
+                let value;
+                if (typeof segment.value === 'number') {
+                    value = segment.value;
+                } else {
+                    const numericValue = parseFloat(segment.value);
+                    value = Number.isNaN(numericValue) ? 0 : numericValue;
+                }
+                const sliceAngle = value / total * Math.PI * 2;
+
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                ctx.lineTo(centerX, centerY);
+                ctx.fillStyle = segment.color || '#6366f1';
+                ctx.fill();
+
+                ctx.strokeStyle = '#1a1f3a';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                currentAngle += sliceAngle;
+            });
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius * 0.3, 0, Math.PI * 2);
+            ctx.fillStyle = '#1a1f3a';
+            ctx.fill();
+        }
+
+        function renderMetrics(metrics) {
+            const grid = document.getElementById('metrics-grid');
+            if (!grid) {
+                return;
+            }
+            grid.innerHTML = '';
+
+            if (!metrics.length) {
+                grid.innerHTML = '<p style="color: #9ca3af;">No metrics available.</p>';
+                return;
+            }
+
+            metrics.forEach(metric => {
+                const card = document.createElement('div');
+                card.className = 'metric-card';
+
+                const label = document.createElement('div');
+                label.className = 'metric-label';
+                label.textContent = metric.label || '';
+
+                const value = document.createElement('div');
+                value.className = 'metric-value';
+                value.textContent = metric.value || '';
+
+                card.appendChild(label);
+                card.appendChild(value);
+                grid.appendChild(card);
+            });
+        }
+
+        function renderProviderTabs(tabs) {
+            const tabsContainer = document.getElementById('provider-tabs');
+            const contentsContainer = document.getElementById('provider-contents');
+            if (!tabsContainer || !contentsContainer) {
+                return;
+            }
+
+            tabsContainer.innerHTML = '';
+            contentsContainer.innerHTML = '';
+
+            if (!tabs.length) {
+                tabsContainer.innerHTML = '<p style="color: #9ca3af;">No provider data available.</p>';
+                return;
+            }
+
+            tabs.forEach((tab, index) => {
+                const button = document.createElement('button');
+                button.className = 'tab' + (index === 0 ? ' active' : '');
+                button.textContent = tab.label || 'Tab ' + (index + 1);
+                const tabId = tab.id || 'tab-' + index;
+                button.dataset.tabTarget = tabId;
+                button.addEventListener('click', () => showTab(tabId));
+                tabsContainer.appendChild(button);
+
+                const content = document.createElement('div');
+                content.className = 'tab-content' + (index === 0 ? ' active' : '');
+                content.id = tabId + '-tab';
+
+                const grid = document.createElement('div');
+                grid.className = 'provider-insights';
+
+                const providers = Array.isArray(tab.providers) ? tab.providers : [];
+                if (!providers.length) {
+                    const empty = document.createElement('p');
+                    empty.style.color = '#9ca3af';
+                    empty.textContent = 'No insights available.';
+                    grid.appendChild(empty);
+                } else {
+                    providers.forEach(provider => {
+                        const card = document.createElement('div');
+                        card.className = 'provider-card';
+
+                        const name = document.createElement('div');
+                        name.className = 'provider-name';
+                        name.textContent = provider.name || '';
+                        card.appendChild(name);
+
+                        const insights = Array.isArray(provider.insights) ? provider.insights : [];
+                        insights.forEach(insight => {
+                            const insightEl = document.createElement('div');
+                            insightEl.className = 'key-insight';
+                            insightEl.textContent = insight;
+                            card.appendChild(insightEl);
+                        });
+
+                        grid.appendChild(card);
+                    });
+                }
+
+                content.appendChild(grid);
+                contentsContainer.appendChild(content);
+            });
+        }
+
+        function renderRiskItems(items) {
+            const container = document.getElementById('risk-items');
+            if (!container) {
+                return;
+            }
+            container.innerHTML = '';
+
+            if (!items.length) {
+                container.innerHTML = '<p style="color: #9ca3af;">No risk items to display.</p>';
+                return;
+            }
+
+            items.forEach(item => {
+                const riskEl = document.createElement('div');
+                riskEl.className = 'risk-item';
+
+                if (item.title) {
+                    const strong = document.createElement('strong');
+                    strong.textContent = item.title + ': ';
+                    riskEl.appendChild(strong);
+                }
+
+                const description = document.createTextNode(item.description || '');
+                riskEl.appendChild(description);
+
+                container.appendChild(riskEl);
+            });
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.toggle('active', content.id === tabId + '-tab');
+            });
+
+            document.querySelectorAll('.tab').forEach(button => {
+                button.classList.toggle('active', button.dataset.tabTarget === tabId);
+            });
+        }
+
+        function showDetail(topic) {
+            console.log('Showing details for:', topic);
+        }
+
+        function showError(message) {
+            const banner = document.getElementById('dashboard-error');
+            if (!banner) {
+                return;
+            }
+            banner.textContent = message;
+            banner.classList.add('active');
+        }
+
+        function applyCardAnimations() {
+            const cards = document.querySelectorAll('.provider-card, .metric-card');
+            if (!cards.length) {
+                return;
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

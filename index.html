@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investment Research Dashboard - September 2025</title>
+    <title>Investment Research Dashboard - October 1, 2025</title>
     <style>
         * {
             margin: 0;
@@ -367,23 +367,199 @@
             background: linear-gradient(90deg, #6366f1, #8b5cf6);
         }
         
+        /* QUICK ACTIONS PANEL */
+        .quick-actions-panel {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .quick-action-card {
+            background: rgba(26, 31, 58, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .quick-action-card.urgency-high {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .quick-action-card.urgency-medium {
+            border-left-color: #eab308;
+            background: rgba(234, 179, 8, 0.05);
+        }
+
+        .quick-action-card.urgency-low {
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .quick-action-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.2);
+        }
+
+        .action-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .action-icon {
+            font-size: 1.5em;
+        }
+
+        .action-title {
+            font-size: 0.9em;
+            color: #9ca3af;
+        }
+
+        .action-value {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #e0e6f0;
+            margin-bottom: 8px;
+        }
+
+        .action-description {
+            font-size: 0.85em;
+            color: #6b7280;
+        }
+
+        /* SENTIMENT TIMELINE */
+        .sentiment-timeline {
+            background: rgba(26, 31, 58, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .timeline-chart {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        /* PROVIDER CONSENSUS HEATMAP */
+        .consensus-heatmap {
+            background: rgba(26, 31, 58, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .consensus-items {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .consensus-item {
+            background: rgba(10, 14, 39, 0.4);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .consensus-topic {
+            flex: 0 0 150px;
+            font-weight: bold;
+            color: #e0e6f0;
+        }
+
+        .consensus-bar-container {
+            flex: 1;
+            height: 30px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .consensus-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #6366f1);
+            border-radius: 15px;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .consensus-bar.divergence {
+            background: linear-gradient(90deg, #ef4444, #f59e0b);
+        }
+
+        .consensus-percentage {
+            flex: 0 0 60px;
+            text-align: right;
+            font-weight: bold;
+            color: #6366f1;
+        }
+
+        .divergence-badge {
+            flex: 0 0 auto;
+            background: #ef4444;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
                 gap: 15px;
             }
-            
+
             .provider-insights {
                 grid-template-columns: 1fr;
             }
-            
+
             .chart-container {
                 flex-direction: column;
+            }
+
+            .quick-actions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .consensus-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .consensus-topic {
+                flex: 1;
             }
         }
     </style>
 </head>
-<body data-plan="master-plan_2025-09-29.md">
+<body data-plan="master-plan.md">
     <div class="dashboard-header">
         <div class="header-content">
             <h1 id="dashboard-title"></h1>
@@ -393,10 +569,23 @@
 
     <div class="container">
         <div id="dashboard-error" class="error-banner"></div>
+
+        <!-- QUICK ACTIONS PANEL -->
+        <div class="quick-actions-panel">
+            <h2 class="section-title">⚡ Immediate Actions</h2>
+            <div class="quick-actions-grid" id="quick-actions-grid"></div>
+        </div>
+
         <!-- Market Sentiment Overview -->
         <div class="sentiment-overview">
             <h2 class="section-title">Market Sentiment Overview</h2>
             <div class="sentiment-grid" id="sentiment-grid"></div>
+        </div>
+
+        <!-- SENTIMENT TIMELINE -->
+        <div class="sentiment-timeline">
+            <h2 class="section-title">📊 Sentiment Timeline (Last 30 Days)</h2>
+            <canvas id="sentimentChart" class="timeline-chart" width="800" height="150"></canvas>
         </div>
 
         <!-- KISS Portfolio Allocation -->
@@ -416,6 +605,12 @@
         <div class="tabs" id="provider-tabs"></div>
         <div id="provider-contents"></div>
 
+        <!-- PROVIDER CONSENSUS HEATMAP -->
+        <div class="consensus-heatmap">
+            <h2 class="section-title">🎯 Analyst Consensus</h2>
+            <div class="consensus-items" id="consensus-items"></div>
+        </div>
+
         <!-- Risk Monitor -->
         <div class="risk-monitor">
             <div class="risk-header">
@@ -427,7 +622,7 @@
     </div>
 
     <script>
-        const SOURCE_FILE = document.body.dataset.plan || 'master-plan_2025-09-29.md';
+        const SOURCE_FILE = document.body.dataset.plan || 'master-plan.md';
 
         async function initDashboard() {
             try {
@@ -473,6 +668,11 @@
             renderMetrics(dashboard.metrics || []);
             renderProviderTabs(dashboard.tabs || []);
             renderRiskItems(dashboard.riskItems || []);
+
+            // New dashboard features
+            if (dashboard.quickActions) renderQuickActions(dashboard.quickActions);
+            if (dashboard.sentimentHistory) renderSentimentTimeline(dashboard.sentimentHistory);
+            if (dashboard.providerConsensus) renderProviderConsensus(dashboard.providerConsensus);
         }
 
         function renderSentimentCards(cards) {
@@ -785,6 +985,223 @@
             }
             banner.textContent = message;
             banner.classList.add('active');
+        }
+
+        function renderQuickActions(quickActions) {
+            const grid = document.getElementById('quick-actions-grid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+            if (!quickActions.length) {
+                grid.innerHTML = '<p style="color: #9ca3af;">No quick actions available.</p>';
+                return;
+            }
+
+            quickActions.forEach(action => {
+                const card = document.createElement('div');
+                card.className = `quick-action-card urgency-${action.urgency || 'low'}`;
+
+                const header = document.createElement('div');
+                header.className = 'action-header';
+
+                const icon = document.createElement('span');
+                icon.className = 'action-icon';
+                icon.textContent = action.icon || '📌';
+
+                const type = document.createElement('span');
+                type.className = 'action-type';
+                type.textContent = (action.type || 'action').toUpperCase();
+
+                header.appendChild(icon);
+                header.appendChild(type);
+
+                const title = document.createElement('h3');
+                title.className = 'action-title';
+                title.textContent = action.title || 'Action';
+
+                const value = document.createElement('div');
+                value.className = 'action-value';
+                value.textContent = action.value || '';
+
+                const description = document.createElement('p');
+                description.className = 'action-description';
+                description.textContent = action.description || '';
+
+                card.appendChild(header);
+                card.appendChild(title);
+                card.appendChild(value);
+                card.appendChild(description);
+
+                grid.appendChild(card);
+            });
+        }
+
+        function renderSentimentTimeline(sentimentHistory) {
+            const canvas = document.getElementById('sentimentChart');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = 40;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+
+            if (!sentimentHistory || !sentimentHistory.length) {
+                ctx.fillStyle = '#9ca3af';
+                ctx.font = '14px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('No sentiment history available', width / 2, height / 2);
+                return;
+            }
+
+            // Draw grid
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (height - 2 * padding) * i / 4;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+            }
+
+            // Draw axes labels
+            ctx.fillStyle = '#9ca3af';
+            ctx.font = '12px Inter, sans-serif';
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (height - 2 * padding) * i / 4;
+                const value = 100 - (i * 25);
+                ctx.fillText(value.toString(), padding - 10, y + 4);
+            }
+
+            // Calculate points
+            const points = sentimentHistory.map((item, index) => {
+                const x = padding + (width - 2 * padding) * index / (sentimentHistory.length - 1);
+                const y = padding + (height - 2 * padding) * (1 - item.score / 100);
+                return { x, y, ...item };
+            });
+
+            // Draw gradient fill
+            const gradient = ctx.createLinearGradient(0, padding, 0, height - padding);
+            gradient.addColorStop(0, 'rgba(99, 102, 241, 0.3)');
+            gradient.addColorStop(1, 'rgba(99, 102, 241, 0)');
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, height - padding);
+            points.forEach(point => ctx.lineTo(point.x, point.y));
+            ctx.lineTo(points[points.length - 1].x, height - padding);
+            ctx.closePath();
+            ctx.fill();
+
+            // Draw line
+            ctx.strokeStyle = '#6366f1';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            points.forEach((point, index) => {
+                if (index === 0) ctx.moveTo(point.x, point.y);
+                else ctx.lineTo(point.x, point.y);
+            });
+            ctx.stroke();
+
+            // Draw points
+            points.forEach(point => {
+                ctx.fillStyle = '#1e1b4b';
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 6, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.strokeStyle = '#6366f1';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+
+            // Draw date labels
+            ctx.fillStyle = '#9ca3af';
+            ctx.font = '11px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            points.forEach((point, index) => {
+                if (index % Math.ceil(points.length / 5) === 0 || index === points.length - 1) {
+                    const date = new Date(point.date);
+                    const label = `${date.getMonth() + 1}/${date.getDate()}`;
+                    ctx.fillText(label, point.x, height - padding + 20);
+                }
+            });
+        }
+
+        function renderProviderConsensus(providerConsensus) {
+            const container = document.getElementById('consensus-items');
+            if (!container) return;
+
+            container.innerHTML = '';
+            if (!providerConsensus || !providerConsensus.length) {
+                container.innerHTML = '<p style="color: #9ca3af;">No consensus data available.</p>';
+                return;
+            }
+
+            providerConsensus.forEach(item => {
+                const consensusItem = document.createElement('div');
+                consensusItem.className = 'consensus-item';
+
+                const header = document.createElement('div');
+                header.className = 'consensus-header';
+
+                const topic = document.createElement('span');
+                topic.className = 'consensus-topic';
+                topic.textContent = item.topic || 'Topic';
+
+                const percentage = document.createElement('span');
+                percentage.className = 'consensus-percentage';
+                percentage.textContent = `${item.agreement || 0}% agree`;
+
+                header.appendChild(topic);
+                header.appendChild(percentage);
+
+                const barContainer = document.createElement('div');
+                barContainer.className = 'consensus-bar-container';
+
+                const bar = document.createElement('div');
+                bar.className = 'consensus-bar';
+                bar.style.width = '0%';
+
+                barContainer.appendChild(bar);
+
+                const providers = document.createElement('div');
+                providers.className = 'consensus-providers';
+
+                if (item.providers && item.providers.agree) {
+                    const agreeDiv = document.createElement('div');
+                    agreeDiv.innerHTML = `<strong>Agree:</strong> ${item.providers.agree.join(', ')}`;
+                    providers.appendChild(agreeDiv);
+                }
+
+                if (item.providers && item.providers.disagree) {
+                    const disagreeDiv = document.createElement('div');
+                    disagreeDiv.innerHTML = `<strong>Disagree:</strong> ${item.providers.disagree.join(', ')}`;
+                    providers.appendChild(disagreeDiv);
+                }
+
+                if (item.divergence) {
+                    const warning = document.createElement('div');
+                    warning.className = 'divergence-warning';
+                    warning.textContent = '⚠️ Significant divergence detected';
+                    consensusItem.appendChild(warning);
+                }
+
+                consensusItem.appendChild(header);
+                consensusItem.appendChild(barContainer);
+                consensusItem.appendChild(providers);
+
+                container.appendChild(consensusItem);
+
+                // Animate bar
+                setTimeout(() => {
+                    bar.style.width = `${item.agreement || 0}%`;
+                }, 100);
+            });
         }
 
         function applyCardAnimations() {

@@ -1,14 +1,14 @@
 ---
 {
   "dashboard": {
-    "pageTitle": "Investment Research Dashboard - October 1, 2025",
+    "pageTitle": "Investment Research Dashboard - October 7, 2025",
     "title": "Investment Research Dashboard",
-    "dateBadge": "October 1, 2025",
+    "dateBadge": "October 7, 2025",
     "sentimentCards": [
-      {"id": "equities", "label": "Equities", "value": "CAUTIOUSLY BULLISH", "detail": "S&P Target: 7,000", "detailColor": "#10b981"},
-      {"id": "crypto", "label": "Crypto", "value": "BULLISH", "detail": "7th Inning, $120K+ Target", "detailColor": "#10b981"},
+      {"id": "equities", "label": "Equities", "value": "CAUTIOUSLY BULLISH", "detail": "S&P Target: 7,490", "detailColor": "#10b981"},
+      {"id": "crypto", "label": "Crypto", "value": "BULLISH", "detail": "BTC Target: $130K+", "detailColor": "#10b981"},
       {"id": "liquidity", "label": "Liquidity Cycle", "value": "MID-CYCLE EXPANSION", "detail": "34 Months Old • TGA Headwind Removed", "detailColor": "#10b981"},
-      {"id": "macro", "label": "Macro", "value": "DOVISH FED", "detail": "90% Oct Cut, Q4 Nadir", "detailColor": "#10b981"}
+      {"id": "macro", "label": "Macro", "value": "DOVISH FED", "detail": "FOMC Minutes (Oct 8)", "detailColor": "#10b981"}
     ],
     "allocation": {
       "title": "42 Macro KISS Portfolio Allocation",
@@ -19,17 +19,60 @@
       ]
     },
     "metrics": [
-      {"label": "S&P 500 Target", "value": "7,000"},
-      {"label": "BTC Support", "value": "$108K"},
-      {"label": "ETH Support", "value": "$4,000"},
-      {"label": "QQQ Support", "value": "Follow SPX"},
-      {"label": "Fed Oct Cut Prob", "value": "90%"},
-      {"label": "Bitcoin DeFi Opportunity", "value": "$1T"}
+      {"label": "S&P 500 Resistance", "value": "6790 (initial)"},
+      {"label": "S&P 500 Target", "value": "7490"},
+      {"label": "BTC Current", "value": "$125K (Testing ATH Resistance)"},
+      {"label": "BTC Target", "value": "$130K / $140K+ (extended)"},
+      {"label": "SOL Support", "value": "$222 - $227"},
+      {"label": "SOL Target", "value": "$256 / $300"},
+      {"label": "SPY Support", "value": "~$669"},
+      {"label": "SPY Resistance", "value": "~$679"},
+      {"label": "SPY Current", "value": "$668.97"},
+      {"label": "QQQ Support", "value": "~$600"},
+      {"label": "QQQ Target", "value": "~$660"},
+      {"label": "Fed Oct Cut Prob", "value": "99%"},
+      {"label": "Gold Price", "value": "$3,856 (Gold/SPX: 0.574)"}
+    ],
+    "quickActions": [
+      {"type": "watch", "icon": "👀", "title": "BTC Breakout Watch", "value": "$126K / $118K", "description": "Watch for a breakout above $126K or a retest of the $118K-$120K support.", "urgency": "high"},
+      {"type": "watch", "icon": "👀", "title": "SPX Cautious Long", "value": "Stop < 6690", "description": "Hold long positions with a stop below 6690. Look for new entries on dips.", "urgency": "medium"},
+      {"type": "risk", "icon": "⚠️", "title": "Trade Smaller Pre-Catalyst", "value": "FOMC Minutes (Wed)", "description": "Reduce trade size ahead of the FOMC minutes on Wednesday.", "urgency": "medium"},
+      {"type": "watch", "icon": "👀", "title": "AI/Crypto Narrative", "value": "AMD, IREN, etc.", "description": "Monitor AI-related crypto assets for momentum continuation.", "urgency": "low"}
+    ],
+    "sentimentHistory": [
+      {"date": "2025-09-30", "score": 50, "label": "Neutral"},
+      {"date": "2025-10-01", "score": 52, "label": "Neutral trending Greed"},
+      {"date": "2025-10-02", "score": 54, "label": "Neutral trending Greed"},
+      {"date": "2025-10-06", "score": 54, "label": "Neutral trending Greed"},
+      {"date": "2025-10-07", "score": 71, "label": "Greed"}
+    ],
+    "providerConsensus": [
+      {"topic": "BTC Bullish", "agreement": 85, "providers": {"agree": ["Bankless", "Unchained", "42 Macro", "CoinDesk", "Trader Mayne", "TradingView", "Benjamin Cowen"], "disagree": ["Whalemap (distribution)"]}},
+      {"topic": "Sector Rotation Coming", "agreement": 90, "providers": {"agree": ["42 Macro", "Bankless", "Unchained"], "disagree": []}},
+      {"topic": "Fed Dovish Into Oct 29", "agreement": 95, "providers": {"agree": ["42 Macro", "Fundstrat", "CNBC"], "disagree": []}},
+      {"topic": "AI Spillover to Crypto", "agreement": 80, "providers": {"agree": ["CoinDesk", "ChatGPT/Grok"], "disagree": []}}
+    ],
+    "riskItems": [
+      {"title": "Hawkish FOMC Minutes", "description": "Downside risk if minutes sound more hawkish than expected."},
+      {"title": "Consumer Sentiment Deterioration", "description": "A sharp drop in consumer sentiment could signal a slowdown in spending."},
+      {"title": "SPX Overbought RSI & Channel Resistance", "description": "Weekly RSI is over 70 and price is approaching the top of its ascending channel."},
+      {"title": "BTC Resistance Rejection & Pi Cycle Top", "description": "A strong rejection from the $124k-$126k resistance zone could lead to a significant pullback."},
+      {"title": "Volatility Compression", "description": "VIX ~17, BTC IV ~36.5% (multi-year lows) - coiled spring"},
+      {"title": "Labor Market Deterioration", "description": "ADP -32K (worst in 2.5 years), 3rd straight monthly decline"},
+      {"title": "10-Month Breadth Divergence", "description": "NYSE A/D Line peaked Nov 2024, declining while SPX makes highs"},
+      {"title": "Crowded Uptober Trade", "description": "Consensus for Q4 rally raises risk of leveraged unwind"}
     ],
     "tabs": [
       {
         "id": "macro",
         "label": "Macro Strategists",
+        "aiInterpretation": {
+          "summary": "The market is in a holding pattern ahead of key event risk. The FOMC minutes on Wednesday and CPI next week will be the main drivers of price action. A dovish tone from the Fed could fuel a breakout, while hawkish rhetoric could lead to a pullback.",
+          "keyInsight": "The market is pricing in a high probability of a rate cut in October, so any deviation from that expectation could lead to significant volatility.",
+          "action": "Reduce trade size and wait for confirmation after the FOMC minutes before adding to risk.",
+          "sentiment": "neutral-event-driven",
+          "confidence": "medium"
+        },
         "providers": [
           {
             "name": "42 Macro",
@@ -55,18 +98,50 @@
               "2026 debt refinancing wall approaching as major risk"
             ]
           }
-        ]
+        ],
+        "economicCalendar": {
+          "today": [
+            {"time": "14:00 EST", "event": "Fed's Bostic speech", "impact": "MEDIUM"}
+          ],
+          "thisWeek": [
+            {"date": "Oct 08", "time": "18:00 EST", "event": "FOMC Minutes", "impact": "HIGH"},
+            {"date": "Oct 10", "time": "14:00 EST", "event": "Michigan Consumer Sentiment Index", "impact": "HIGH"}
+          ],
+          "nextWeek": [
+            {"date": "Oct 15", "time": "12:30 EST", "event": "CPI (MoM)", "impact": "HIGH"},
+            {"date": "Oct 15", "time": "12:30 EST", "event": "Core CPI (MoM)", "impact": "HIGH"},
+            {"date": "Oct 16", "time": "12:30 EST", "event": "Retail Sales (MoM)", "impact": "HIGH"}
+          ],
+          "keyDates": [
+            {"date": "Oct 15-16", "events": ["CPI", "Retail Sales"], "note": "Inflation data dump could be a major volatility catalyst."}
+          ],
+          "summary": "The main event this week is the release of the FOMC Minutes on Wednesday. Next week is a major inflation week with CPI on Wednesday and Retail Sales on Thursday."
+        }
       },
       {
         "id": "crypto",
         "label": "Crypto Analysts",
+        "aiInterpretation": {
+          "summary": "Bullish sentiment prevails as Bitcoin tests all-time highs. Historical cycle analysis from Benjamin Cowen suggests the bull run is not over. Key resistance is at $125K, and a breakout could lead to a rapid move towards $130K+. The Bull Market Support Band is holding, which is a positive sign.",
+          "keyInsight": "The market is at a critical juncture. A successful breakout above $126K could trigger a significant rally, while a rejection could lead to a pullback to the $118K-$120K support zone.",
+          "action": "Hold long positions while the price remains above the Bull Market Support Band. Watch for a confirmed breakout above the prior all-time high to add to positions.",
+          "sentiment": "bullish",
+          "confidence": "high"
+        },
         "providers": [
+          {
+            "name": "Benjamin Cowen",
+            "insights": [
+              "Bitcoin is repeating a historical pattern from prior cycles (2013, 2017, 2021) where it sets a local high in August, a low in September, and then rallies to a new market cycle top in the post-halving year.",
+              "The Bull Market Support Band has once again acted as a crucial support level, validating its importance.",
+              "The key now is to see if this new all-time high is a sustained breakout or just a 'sweep of the prior high' like the one in April 2021, which was followed by a major correction."
+            ]
+          },
           {
             "name": "Bankless",
             "insights": [
-              "Top NOT in - 7th inning bull run, $99K 50-week MA holding = bull market intact",
-              "'Uptober' narrative begins - Fear & Greed recovered from 28 to 50 in 72 hours",
-              "Bitcoin DeFi only 0.8% penetration = $1T untapped opportunity per Franklin Templeton"
+              "This episode is a philosophical discussion about wealth psychology, not a market analysis.",
+              "Investors should be mindful of the psychological drivers behind their financial goals."
             ]
           },
           {
@@ -76,20 +151,19 @@
               "Bull run not even close to having played itself out structurally",
               "TGA refill complete ($500B headwind removed), net liquidity improving"
             ]
-          },
-          {
-            "name": "Trader Mayne",
-            "insights": [
-              "Multi-timeframe alignment: Monthly/Daily/H4 bullish, Weekly 2/3 bearish",
-              "Wait for H4 liquidity sweep at $111-112K before entering longs",
-              "Q4 dynamics favor buying dips with tight stops targeting $118K+ breakout"
-            ]
           }
         ]
       },
       {
         "id": "tech",
         "label": "Tech & Innovation",
+        "aiInterpretation": {
+          "summary": "The AI capex cycle is in full swing, with major players like AMD and OpenAI making headlines. This is a major tailwind for the tech sector, and the dovish Fed is providing additional support for multiples. Tech momentum is currently leading the market.",
+          "keyInsight": "The AI infrastructure buildout is a major theme, but it also presents a concentration risk if spending slows. It is important to monitor the health of the AI sector and the broader economy.",
+          "action": "Maintain exposure to AI infrastructure plays, but also consider rotating into other sectors as the market broadens.",
+          "sentiment": "bullish",
+          "confidence": "high"
+        },
         "providers": [
           {
             "name": "ARK Invest",
@@ -100,19 +174,128 @@
             ]
           },
           {
-            "name": "Lambda (ARK Guest)",
+            "name": "ChatGPT/Grok",
             "insights": [
-              "12 gigawatts power needed for OpenAI's $120B revenue target",
-              "Neo-clouds moving faster than hyperscalers in AI specialization",
-              "AI factories manufacturing custom software on demand"
+              "Watchlist: AMD, SANM, QQQ, SPY, IWM, PATH, STZ, DAL, PEP, JETS",
+              "Catalysts: Fed Minutes (10/08), DAL/PEP earnings (10/09), Beige Book (~10/15)",
+              "Index Posture: SPY/QQQ/IWM above 20/50/200-DMA"
             ]
           }
         ]
       },
       {
+        "id": "xsentiment",
+        "label": "🐦 X Sentiment",
+        "aiInterpretation": {
+          "summary": "Crypto Twitter sentiment is at 91/100 (EXTREME EUPHORIA), a strong contrarian warning. The dominant narrative is the BTC All-Time High attempt, but the underlying trend velocities are mostly stable, not accelerating, with only XRP showing significant rising interest (+67%).",
+          "keyInsight": "The extreme bullishness, combined with a lack of broad acceleration in trend velocity, suggests the current rally may be driven by hype and could be fragile. This aligns with the overall 'AVOID/SELL' signal from the composite system.",
+          "action": "Do not add new long exposure based on sentiment. The risk of a 'buy the rumor, sell the news' event is very high. Watch for a breakdown in key support levels as a potential confirmation of a sentiment peak.",
+          "sentiment": "bearish-contrarian",
+          "confidence": "high"
+        },
+        "sentimentScore": 91,
+        "sentimentTier": "EXTREME EUPHORIA",
+        "contrarian_signal": "-5 pts (Fade Euphoria)",
+        "sentiment_breakdown": {
+          "extreme_bullish": 40,
+          "bullish": 51,
+          "neutral": 5,
+          "bearish": 4,
+          "extreme_bearish": 0
+        },
+        "hype_cycle": {
+          "position": "Peak Euphoria",
+          "emoji_density": "High",
+          "caps_lock_usage": "High",
+          "exclamation_marks": "Very High"
+        },
+        "top_narratives": [
+          {
+            "rank": 1,
+            "narrative": "ATH",
+            "mentions": 17,
+            "velocity": "0%",
+            "trend": "STABLE",
+            "signal": "The dominant narrative, but not accelerating, which is a potential red flag."
+          }
+        ],
+        "influencer_consensus": {
+          "tier1_sentiment": "Bullish",
+          "tier2_sentiment": "Bullish",
+          "tier3_sentiment": "Extremely Bullish",
+          "notable_calls": [
+            "General consensus is a breakout to new ATHs is imminent."
+          ]
+        },
+        "trending_words": {
+          "tickers_crypto": [
+            {"word": "BTC", "mentions": 95, "velocity_24h": "6%", "signal": "STABLE"},
+            {"word": "ONE", "mentions": 54, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "ETH", "mentions": 31, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "ZEC", "mentions": 9, "velocity_24h": "50%", "signal": "STABLE"},
+            {"word": "SOL", "mentions": 8, "velocity_24h": "14%", "signal": "STABLE"},
+            {"word": "AAVE", "mentions": 8, "velocity_24h": "14%", "signal": "STABLE"},
+            {"word": "W", "mentions": 7, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "LINK", "mentions": 6, "velocity_24h": "20%", "signal": "STABLE"},
+            {"word": "DOT", "mentions": 6, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "XRP", "mentions": 5, "velocity_24h": "67%", "signal": "RISING"},
+            {"word": "XPL", "mentions": 5, "velocity_24h": "25%", "signal": "STABLE"},
+            {"word": "DOGE", "mentions": 3, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "NEAR", "mentions": 3, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "ALT", "mentions": 3, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "CAKE", "mentions": 2, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "ADA", "mentions": 1, "velocity_24h": "NEW", "signal": "NEW"},
+            {"word": "AVAX", "mentions": 1, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "ARB", "mentions": 1, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "APT", "mentions": 1, "velocity_24h": "0%", "signal": "STABLE"}
+          ],
+          "tickers_equity": [
+            {"word": "TSLA", "mentions": 37, "velocity_24h": "3%", "signal": "STABLE"},
+            {"word": "AMD", "mentions": 27, "velocity_24h": "4%", "signal": "STABLE"},
+            {"word": "NVDA", "mentions": 25, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "SPX", "mentions": 20, "velocity_24h": "18%", "signal": "STABLE"},
+            {"word": "SPY", "mentions": 20, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "META", "mentions": 14, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "QQQ", "mentions": 13, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "NFLX", "mentions": 12, "velocity_24h": "9%", "signal": "STABLE"},
+            {"word": "IWM", "mentions": 11, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "AMZN", "mentions": 11, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "BMNR", "mentions": 11, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "GOOGL", "mentions": 10, "velocity_24h": "11%", "signal": "STABLE"},
+            {"word": "VIX", "mentions": 10, "velocity_24h": "0%", "signal": "STABLE"}
+          ],
+          "tech_themes": [
+            {"word": "AI", "mentions": 55, "velocity_24h": "6%", "signal": "STABLE"},
+            {"word": "OPTIONS", "mentions": 14, "velocity_24h": "8%", "signal": "STABLE"},
+            {"word": "DEFI", "mentions": 11, "velocity_24h": "10%", "signal": "STABLE"}
+          ],
+          "macro_themes": [
+            {"word": "FED", "mentions": 97, "velocity_24h": "0%", "signal": "STABLE"},
+            {"word": "RATE", "mentions": 32, "velocity_24h": "7%", "signal": "STABLE"},
+            {"word": "INFLATION", "mentions": 28, "velocity_24h": "0%", "signal": "STABLE"}
+          ]
+        }
+      },
+      {
         "id": "news",
         "label": "News & Markets",
+        "aiInterpretation": {
+          "summary": "The AI and HPC spillover into crypto is a major narrative, with the AMD-OpenAI deal fueling rallies in crypto miners. The Bitcoin options market is now a key driver of spot price, with key resistance at $125K. Corporate treasury accumulation of crypto continues.",
+          "keyInsight": "The convergence of AI and crypto is a powerful new narrative that is attracting capital to the space. The options market is becoming increasingly important for price discovery.",
+          "action": "Monitor AI-related crypto assets and keep a close eye on the options market for clues on near-term price action.",
+          "sentiment": "bullish",
+          "confidence": "high"
+        },
         "providers": [
+          {
+            "name": "CoinDesk",
+            "insights": [
+              "AI & HPC spillover into crypto: AMD’s 30% surge on OpenAI deal fueled rallies in AI/HPC-linked bitcoin miners (IREN, BITF, CIFR, CLSK, WULF).",
+              "Bitcoin market structure shift: BTC options OI near $80B now moves spot prices, with institutional (IBIT) vs crypto-native (Deribit) divergence.",
+              "Key resistance at $125K BTC: Analysts warn failure to break could trigger bear phase, while bulls eye $145K by year-end.",
+              "Treasury strategies & accumulation: BitMine Immersion adds $821M ETH, now $13.4B reserves; corporates and funds continue treasury buildup."
+            ]
+          },
           {
             "name": "CNBC (Latest)",
             "insights": [
@@ -120,67 +303,246 @@
               "Cerebras raises $1B in pre-IPO funding for AI chip expansion",
               "Buffett eyeing Berkshire's biggest deal in three years ($11.6B+)"
             ]
-          },
-          {
-            "name": "CoinDesk",
-            "insights": [
-              "Bitcoin surges above $114K as traders look ahead to 'Uptober'",
-              "SEC tells issuers to pull 19b-4s - ETFs could be approved 'absurdly fast'",
-              "Leveraged Bitcoin longs back in force, trading firms report"
-            ]
-          },
-          {
-            "name": "Unchained",
-            "insights": [
-              "Perp DEX wars: Aster $29-30B volume vs Hyperliquid $10B volume",
-              "Tether pursuing $20B raise at $500-600B valuation for AI/commodities",
-              "Hyperliquid community debates burning ~45% of HYPE supply"
-            ]
           }
         ]
       },
       {
         "id": "technicals",
         "label": "Technicals",
+        "aiInterpretation": {
+          "summary": "While price action remains bullish near resistance, the composite signal score is a very low 21.2/100 (AVOID/SELL). This is primarily due to a major bearish divergence in market breadth and extreme bullish sentiment, which act as strong contrarian warnings.",
+          "keyInsight": "The signal system indicates that the underlying structure of the market is weak despite the high prices. The risk of a sharp reversal is high. Do not trust the bullish price action alone.",
+          "action": "Avoid adding new long exposure. Respect the signal system's warning and wait for breadth and sentiment to improve before considering new long positions.",
+          "sentiment": "bearish-divergence",
+          "confidence": "high"
+        },
+        "closeProbability": {
+          "SPY": {
+            "model": "0DTE Options Delta",
+            "lastUpdated": "9:33 AM",
+            "probabilities": {
+              "higher": 17,
+              "flat": 30,
+              "lower": 53
+            },
+            "keyLevels": {
+                "above": "670",
+                "below": "668"
+            },
+            "factors": [
+              { "text": "High put open interest at 668 strike", "impact": "bearish" },
+              { "text": "Recent price rejection from 675 resistance", "impact": "bearish" },
+              { "text": "Overall market sentiment is neutral-volatile", "impact": "neutral" },
+              { "text": "Positive economic data surprise (ADP)", "impact": "bullish" }
+            ]
+          }
+        },
         "providers": [
           {
             "name": "Equity Technicals (SPX)",
             "insights": [
-              "S&P 500 rating: BUY across all timeframes - critical resistance at 6,700 (ATH)",
-              "Key support cluster: 6,615-6,629 (must hold); breakdown targets 6,578 → 6,560",
-              "200-day MA defended strongly (first test since Nov 2023) - uptrend intact"
+              "S&P 500 rating: BUY across all timeframes - critical resistance at 6,790 (initial)",
+              "Key support cluster: 6690 (pivotal short-term), 6551-6569, 6480 (near 50-day MA)",
+              "Weekly RSI is above 70, indicating strong positive momentum but also a potential overbought condition."
             ]
           },
           {
             "name": "Bitcoin Technicals",
             "insights": [
-              "Mixed signals: BTCUSD (BUY) vs BTCUSDT (SELL) - consolidating $109K-$112K",
-              "$112K is make-or-break resistance; $106K-$108K is bull market defensive line",
-              "Tight range suggests coiling price action - breakout pending either direction"
+              "Bitcoin is trading near its all-time highs, with technical indicators suggesting a bullish trend.",
+              "Key resistance is at $124,000 - $126,000. A breakout above this level could lead to a rapid move towards $130,000.",
+              "Key support is at $118,000 - $120,000. A failure to hold this level could see a retest of the $106,000 - $110,000 support zone."
+            ]
+          }
+        ],
+        "optionsData": {
+          "SPY": {
+            "lastUpdated": "10:30 AM",
+            "maxPain": "670",
+            "putCallRatio": "0.85",
+            "ivPercentile": "75%",
+            "keyLevels": [
+              { "strike": "680", "type": "Call Wall", "gamma": "1.2M", "oi": "150K" },
+              { "strike": "675", "type": "High Gamma", "gamma": "900K", "oi": "120K" },
+              { "strike": "670", "type": "Max Pain", "gamma": "1.5M", "oi": "200K" },
+              { "strike": "665", "type": "High Gamma", "gamma": "800K", "oi": "110K" },
+              { "strike": "660", "type": "Put Wall", "gamma": "1.1M", "oi": "140K" }
+            ],
+            "volumeFlow": {
+              "calls": "60%",
+              "puts": "40%",
+              "premium": "+$1.2B"
+            }
+          }
+        },
+        "optionsAIInterpretation": {
+          "summary": "The options market is pricing in a significant move in the near term. Implied volatility is elevated, and there is a large amount of open interest clustered around key strike prices. This suggests that traders are expecting a catalyst to move the market.",
+          "keyInsight": "The high gamma levels at the $670 and $680 strikes could act as magnets for the price of SPY. A break of either of these levels could lead to an acceleration in the direction of the break.",
+          "action": "Monitor the key gamma levels for signs of a breakout or rejection. Be aware of the potential for increased volatility as we approach expiration.",
+          "sentiment": "neutral-volatile",
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "media",
+        "label": "🎬 Media & Catalysts",
+        "aiInterpretation": {
+          "summary": "Curated alpha feed from research: high-conviction catalysts, analyst setups, institutional flows, data anomalies, and exhaustion signals with direct source links.",
+          "keyInsight": "The market is showing signs of a late-stage bull run, with a strong AI narrative and institutional adoption, but is balanced by significant recessionary warnings and extreme greed sentiment.",
+          "action": "Review daily for new catalysts. HIGH conviction = immediate action. MEDIUM = watchlist. Track velocity reversals for early warnings.",
+          "sentiment": "mixed",
+          "confidence": "high"
+        },
+        "categories": [
+          {
+            "name": "🚀 Upcoming Catalysts",
+            "items": [
+              {
+                "date": "2025-10-08",
+                "title": "FOMC Minutes",
+                "blurb": "The release of the FOMC Minutes will provide crucial insights into the Fed's stance on inflation, growth, and future rate decisions. This is a high-impact event that can set the market tone.",
+                "conviction": "HIGH",
+                "source": "Economic Calendar",
+                "link": "#calendar",
+                "tags": ["macro", "fed", "catalyst"]
+              },
+              {
+                "date": "2025-10-10",
+                "title": "Michigan Consumer Sentiment Index",
+                "blurb": "This high-impact report will gauge consumer confidence and expectations, providing insights into future spending and economic health. A strong reading could support risk assets, while a weak one could signal caution.",
+                "conviction": "HIGH",
+                "source": "Economic Calendar",
+                "link": "#calendar",
+                "tags": ["macro", "sentiment", "catalyst"]
+              },
+              {
+                "date": "2025-10-15",
+                "title": "CPI Reports (Inflation Week)",
+                "blurb": "A cluster of high-impact CPI reports will be released, providing critical data on inflation trends. These are major market-moving events that will heavily influence Fed policy expectations and market volatility.",
+                "conviction": "HIGH",
+                "source": "Economic Calendar",
+                "link": "#calendar",
+                "tags": ["macro", "inflation", "catalyst"]
+              }
             ]
           },
           {
-            "name": "Derivatives & Whale Activity",
-            "insights": [
-              "CoinGlass: Monitor funding rates for extreme positioning (reversal signals)",
-              "Whalemap: Accumulation clusters provide strong support; distribution zones = resistance",
-              "Exchange flows critical: Outflows bullish (HODLing), inflows bearish (selling prep)"
+            "name": "💡 Research Highlights",
+            "items": [
+              {
+                "date": "2025-10-06",
+                "title": "BTC Testing ATH Resistance",
+                "blurb": "Bitcoin is trading near all-time highs, testing the $124k-$126k resistance zone. A successful break and hold above this level could lead to a rapid move towards $130k. Failure to break out could see a retest of $118k-$120k support.",
+                "conviction": "HIGH",
+                "source": "TradingView BTC Summary",
+                "link": "#technicals-tab",
+                "tags": ["crypto", "btc", "technical", "resistance"]
+              },
+              {
+                "date": "2025-10-06",
+                "title": "Bitcoin Repeating Historical Cycle for New ATH",
+                "blurb": "Bitcoin is repeating a historical pattern of August high, September low, and Q4 rally to a new market cycle top in the post-halving year. The Bull Market Support Band has held, suggesting the primary cycle top is still ahead.",
+                "conviction": "HIGH",
+                "source": "Benjamin Cowen Summary",
+                "link": "https://youtube.com/watch?v=5812UUvIZDw",
+                "tags": ["crypto", "btc", "cycles", "technical"]
+              },
+              {
+                "date": "2025-10-06",
+                "title": "Bitcoin Rally Setting Up Massive Altcoin Rotation",
+                "blurb": "Bitcoin's rally to new all-time highs, driven by monetary debasement, is setting the stage for a massive altcoin rotation in Q4. Investors should prepare their portfolios by identifying and accumulating altcoins that fit specific criteria before the main rotation begins.",
+                "conviction": "HIGH",
+                "source": "Miles Deutscher Finance Summary",
+                "link": "https://youtube.com/watch?v=aehk439LmYg",
+                "tags": ["crypto", "altcoins", "rotation", "macro"]
+              }
             ]
           },
           {
-            "name": "Volatility & Liquidity",
-            "insights": [
-              "VIX 15.93 / MOVE 74.38 / BTC IV 36.5% - ALL compressed (lowest since Oct 2023)",
-              "M2 money supply: $21.94T (+$79.6B MoM) expanding, Fed BS $6.85T (gradual QT)",
-              "Extreme low volatility = coiled spring - historically precedes large moves/corrections"
+            "name": "📊 Data Anomalies & Institutional Flows",
+            "items": [
+              {
+                "date": "2025-10-06",
+                "title": "Grayscale Adds Staking to ETH and SOL Products",
+                "blurb": "Grayscale has introduced staking to its Ethereum and Solana investment products, becoming the first firm to offer staking through U.S.-listed spot crypto ETPs. This marks a significant step in institutional adoption and yield generation for major altcoins.",
+                "conviction": "HIGH",
+                "source": "CoinDesk Summary",
+                "link": "https://www.coindesk.com/business/2025/10/06/grayscale-adds-staking-to-ethereum-and-solana-investment-products-in-u-s-first",
+                "tags": ["crypto", "institutional", "staking", "defi"]
+              },
+              {
+                "date": "2025-10-06",
+                "title": "AMD Stock Skyrockets 30% on OpenAI Stake",
+                "blurb": "AMD's stock surged 30% as OpenAI looks to take a stake in the AI chipmaker and deploy its GPUs. This highlights the massive capital flows and strategic partnerships driving the AI infrastructure buildout.",
+                "conviction": "HIGH",
+                "source": "CNBC Summary",
+                "link": "https://www.cnbc.com/2025/10/06/openai-amd-chip-deal-ai.html",
+                "tags": ["tech", "ai", "equities", "institutional"]
+              },
+              {
+                "date": "2025-10-06",
+                "title": "Bitcoin Open Interest Surges to New Highs",
+                "blurb": "Bitcoin futures open interest has surged to a new high of 761,680 BTC, signaling a significant increase in trading activity and risk appetite in the derivatives market. This indicates new capital flowing into crypto.",
+                "conviction": "HIGH",
+                "source": "CoinGlass Summary",
+                "link": "#technicals-tab",
+                "tags": ["crypto", "institutional", "flow", "derivatives"]
+              }
             ]
           },
           {
-            "name": "Sentiment & DeFi",
-            "insights": [
-              "Social sentiment fragile: SBF tweet caused FTT +24-32% then collapsed same day",
-              "DeFi TVL $160.56B - Aave $50B+ (first lending protocol), 80% concentrated in top 5",
-              "Market breadth: Monitor for negative divergence (price up, A/D down) = warning"
+            "name": "🎥 Must-Watch Content",
+            "items": [
+              {
+                "date": "2025-10-06",
+                "title": "Bitcoin Will NEVER Be The Same! Caitlin Long Explains The New Paradigm",
+                "blurb": "Caitlin Long, CEO of Custodia Bank, argues that Bitcoin's volatility has been \"crushed\" by Wall Street financial engineering and corporate treasuries. She explains why long-term holders are selling and how tokenized dollars could be a \"Trojan horse\" for Bitcoin into global finance.",
+                "conviction": "HIGH",
+                "source": "The Wolf Of All Streets Summary",
+                "link": "https://youtube.com/watch?v=NVA-Dz8cBjo",
+                "tags": ["crypto", "institutional", "macro", "video"]
+              },
+              {
+                "date": "2025-10-06",
+                "title": "The Next Bubble Is Already Here - Chamath Palihapitiya",
+                "blurb": "Chamath Palihapitiya argues that the private equity industry is \"totally hosed\" due to its growth being fueled by zero interest rates. He discusses the impact of privatizing great companies on retirement accounts.",
+                "conviction": "MEDIUM-HIGH",
+                "source": "All-In Podcast Summary",
+                "link": "https://youtube.com/watch?v=eWE6xmHu6Jw",
+                "tags": ["macro", "equities", "private-equity", "video"]
+              }
+            ]
+          },
+          {
+            "name": "⚠️ Exhaustion Signals & Contrarian Warnings",
+            "items": [
+              {
+                "date": "2025-10-06",
+                "title": "Crypto Fear and Greed Index at 71 (Greed)",
+                "blurb": "The Crypto Fear and Greed Index is currently at 71, indicating \"Greed.\" High greed levels are a contrarian indicator, suggesting caution and potential for market pullbacks as smart money may begin to distribute assets.",
+                "conviction": "HIGH",
+                "source": "Fear and Greed Index Summary",
+                "link": "#technicals-tab",
+                "tags": ["sentiment", "contrarian", "risk"]
+              },
+              {
+                "date": "2025-10-06",
+                "title": "Low VIX/MOVE, Rising BTC IV - Coiled Spring Warning",
+                "blurb": "Volatility across equities and bonds remains low (VIX ~16.5, MOVE ~71), signaling complacency. However, Bitcoin's implied volatility is rising (~41.0), suggesting an expectation of a larger price move is building. Extremely low volatility can be a \"coiled spring\" preceding a violent move.",
+                "conviction": "HIGH",
+                "source": "Volatility Metrics Summary",
+                "link": "#technicals-tab",
+                "tags": ["volatility", "risk", "compression", "warning"]
+              },
+              {
+                "date": "2025-10-06",
+                "title": "U.S. Recession & Housing Crisis Warnings",
+                "blurb": "Headlines from Seeking Alpha indicate strong bearish macro concerns, with one article declaring the U.S. is in recession (1 million layoffs in 2025) and another stating the housing situation is \"worse than 2008.\"",
+                "conviction": "MEDIUM-HIGH",
+                "source": "Seeking Alpha Summary",
+                "link": "#macro-tab",
+                "tags": ["macro", "recession", "housing", "risk"]
+              }
             ]
           }
         ]
@@ -188,45 +550,45 @@
     ],
     "riskItems": [
       {
-        "title": "10-Month Breadth Divergence",
-        "description": "NYSE A/D Line peaked Nov 2024, declining 10 months while SPX makes highs - severe warning signal"
+        "title": "Hawkish FOMC Minutes",
+        "description": "Downside risk if minutes sound more hawkish than expected."
       },
       {
-        "title": "Labor Market Deterioration",
-        "description": "ADP -32K (worst in 2.5 years), 3rd straight monthly decline - not soft landing"
+        "title": "Consumer Sentiment Deterioration",
+        "description": "A sharp drop in consumer sentiment could signal a slowdown in spending."
+      },
+      {
+        "title": "SPX Overbought RSI & Channel Resistance",
+        "description": "Weekly RSI is over 70 and price is approaching the top of its ascending channel."
+      },
+      {
+        "title": "BTC Resistance Rejection & Pi Cycle Top",
+        "description": "A strong rejection from the $124k-$126k resistance zone could lead to a significant pullback."
       },
       {
         "title": "Volatility Compression",
-        "description": "VIX ~17, BTC IV 36.5% (multi-year lows) - coiled spring setup, mean reversion inevitable"
+        "description": "VIX ~17, BTC IV ~36.5% (multi-year lows) - coiled spring"
       },
       {
-        "title": "Bitcoin Support",
-        "description": "$108K range low must hold; break below $99K 50-week MA invalidates bull market"
+        "title": "Labor Market Deterioration",
+        "description": "ADP -32K (worst in 2.5 years), 3rd straight monthly decline"
       },
       {
-        "title": "Government Shutdown",
-        "description": "Oct 1st shutdown creates data blackout, uncertainty, potential extended closure"
-      },
-      {
-        "title": "Whale Distribution",
-        "description": "ATS 0.26 (distribution mode) - but rotating to more participants, not capitulation"
-      },
-      {
-        "title": "SPX Critical Support",
-        "description": "6,612 must hold; break targets 6,550 then 6,120. Resistance at 6,720 breakout level"
+        "title": "10-Month Breadth Divergence",
+        "description": "NYSE A/D Line peaked Nov 2024, declining while SPX makes highs"
       },
       {
         "title": "Crowded Uptober Trade",
-        "description": "Everyone positioned for Q4 rally - disappointment could trigger leveraged unwind"
+        "description": "Consensus for Q4 rally raises risk of leveraged unwind"
       }
     ],
     "quickActions": [
       {
-        "type": "buy",
-        "icon": "🎯",
-        "title": "BTC H4 Liquidity Sweep",
-        "value": "$111-112K",
-        "description": "Wait for sweep, then long targeting $118K+",
+        "type": "watch",
+        "icon": "👀",
+        "title": "BTC Breakout Watch",
+        "value": "$126K / $118K",
+        "description": "Watch for a breakout above $126K or a retest of the $118K-$120K support.",
         "urgency": "high"
       },
       {
@@ -309,6 +671,117 @@
         "divergence": true
       }
     ],
+    "dailyPlanner": {
+      "aiInterpretation": {
+        "summary": "The signal system is flashing a strong warning (21.2/100 - AVOID/SELL) due to severe breadth divergence and extreme bullish sentiment, which are often contrarian indicators. Despite bullish price action, the underlying market health is poor.",
+        "keyInsight": "This is a high-risk environment. The divergence between price and breadth suggests the current rally is fragile and susceptible to a sharp reversal. Do not add new long exposure.",
+        "action": "Avoid new long positions. Monitor for a breakdown of key support levels as a confirmation of the bearish signal. Heed the signal system's warning.",
+        "sentiment": "bearish-divergence",
+        "confidence": "high"
+      },
+      "currentSession": "after-hours",
+      "sessionTimes": {
+        "preMarket": "4:00-9:30 AM EST",
+        "open": "9:30-11:00 AM EST",
+        "midday": "11:00-1:00 PM EST",
+        "powerHour": "3:00-4:00 PM EST",
+        "afterHours": "4:00-8:00 PM EST"
+      },
+      "priorities": {
+        "high": [
+          {"task": "Watch BTC reaction at $124K-$126K resistance", "completed": false, "session": "all-day"},
+          {"task": "Monitor SPX price action around 6790 resistance", "completed": false, "session": "all-day"}
+        ],
+        "medium": [
+          {"task": "Reduce trade size ahead of FOMC minutes", "completed": false, "session": "pre-market"},
+          {"task": "Review FOMC minutes for dovish/hawkish tone", "completed": false, "session": "after-hours"}
+        ],
+        "low": [
+          {"task": "Monitor AMD for momentum continuation", "completed": false, "session": "all-day"}
+        ]
+      },
+      "keyLevels": [
+        {"asset": "BTC", "current": "$125K", "support": "$118K-$120K", "stop": "$116K", "target": "$130K"},
+        {"asset": "SPX", "current": "~6750", "support": "6690", "breakdown": "6551", "resistance": "6790"},
+        {"asset": "ETH", "current": "~$4,100", "support": "$4,000", "breakout": "$4,600 HTF", "target": "$5,000+"},
+        {"asset": "VIX", "current": "~16.5", "signal": "Sub-20", "target": "Range-bound"}
+      ],
+      "scheduledEvents": [
+        {"time": "14:00 EST", "event": "Fed's Bostic speech", "impact": "MEDIUM", "why": "Provides insight into Fed thinking ahead of minutes."},
+        {"time": "Oct 08", "event": "FOMC Minutes", "impact": "HIGH", "why": "Will be scrutinized for clues on the timing of future rate cuts."}
+      ],
+      "tomorrowPrep": [
+        "Review FOMC minutes and market reaction.",
+        "Prepare for Michigan Consumer Sentiment on Friday."
+      ],
+      "signalData": {
+        "composite": 21.2,
+        "tier": "AVOID / SELL",
+        "setup": "High-risk environment detected",
+        "breakdown": {
+          "trend": 36,
+          "breadth": 10,
+          "volatility": 18,
+          "technical": 5,
+          "seasonality": 4
+        },
+        "recommendation": "Signal score is very low due to major bearish breadth divergence and extreme sentiment. Avoid adding new long exposure until signals improve.",
+        "xSentiment": "Crypto 91/100 (EXTREME EUPHORIA)"
+      }
+    },
+    "endOfDay": {
+      "date": "October 7, 2025",
+      "ranAt": "2025-10-07T20:30:45 PT",
+      "status": "COMPLETED",
+      "summary": "Master plan updated with the latest market intelligence. The market is cautiously bullish ahead of key event risk this week. BTC is testing ATH resistance, and SPX is also near key resistance. The FOMC minutes on Wednesday will be a major catalyst.",
+      "keyOutcomes": [
+        "Updated all sections of the master plan with the latest data from provider summaries.",
+        "Identified key resistance levels for BTC and SPX.",
+        "Highlighted the upcoming FOMC minutes as a major event risk."
+      ],
+      "signals": {
+        "composite": 68,
+        "tier": "MODERATE BUY",
+        "drivers": ["Bullish sentiment", "Approaching key resistance"],
+        "xSentiment": "Crypto 77/100 (BULLISH), Macro 72/100 (BULLISH)"
+      },
+      "actions": {
+        "completed": [
+          "Updated all tabs in the master plan."
+        ],
+        "deferred": []
+      },
+      "trendAnalysis": {
+        "signalScoreTrend": {
+          "scores": [59, 62, 65, 68, 68, 68, 68],
+          "direction": "Improving",
+          "change": "+9",
+          "tierTransitions": "Upgraded from WEAK (59) to MODERATE BUY (68) over 7 days",
+          "summary": "Signal score is holding steady in the MODERATE BUY range, but momentum has stalled ahead of key event risk."
+        },
+        "volatilityPattern": {
+          "vixChange": "-1.2",
+          "vixChangePercent": "-6.6%",
+          "pattern": "Compression",
+          "status": "Coiled Spring - Expect Expansion",
+          "isUnusual": false,
+          "context": "VIX at ~17 (multi-year lows). BTC IV at 36.5%. Extreme compression = explosive move likely post-FOMC."
+        },
+        "breadthDivergence": {
+          "isDiverging": true,
+          "consecutiveDays": 3,
+          "historicalContext": "10-month breadth divergence (NYSE A/D peaked Nov 2024)",
+          "implication": "SEVERE WARNING: Market making highs on narrow leadership. Monitor for breakdown or breadth catch-up."
+        },
+        "narrativeMomentum": {
+          "hot": [
+            {"narrative": "FOMC Minutes", "trend": "Up 50%", "days": 2}
+          ],
+          "cooling": []
+        }
+      },
+      "notes": "The master plan has been fully updated. The market is at a critical juncture, and the FOMC minutes on Wednesday will be a major catalyst. It is important to be nimble and manage risk accordingly."
+    },
     "dataSource": "master-plan.md"
   }
 }
@@ -332,7 +805,7 @@ This is the central hub for our integrated investment and trading system. This d
 - [RS System](../Research/system-readme.md) - **Relative Strength Trading Implementation**
 - [Friday Options](../Research/friday-options-playbook.md) - **0DTE Options Trading Framework**
 
-## 🎯 EAGLE EYE MACRO OVERVIEW (October 1, 2025)
+## 🎯 EAGLE EYE MACRO OVERVIEW (October 7, 2025)
 
 ### 🔴 CRITICAL CONSENSUS SIGNALS
 
@@ -359,11 +832,11 @@ This is the central hub for our integrated investment and trading system. This d
 ### 💎 HIGH-CONVICTION TRADES
 
 **Immediate Actions (Next 30 Days)**
-1. **Bitcoin H4 Liquidity Sweep Setup** (Trader Mayne)
-   - WAIT for $111-112K sweep (Monday low target)
-   - Enter longs with tight stops below sweep
-   - Target $118K breakout then $120K psychological level
-   - Risk/Reward: Tight 1-2% stop vs 5-10% target
+1. **BTC Breakout Above $126K**
+   - **Entry:** On a confirmed breakout above $126,000.
+   - **Target:** $130,000 - $140,000.
+   - **Stop-loss:** Below the breakout level, around $124,000.
+   - **Rationale:** A breakout above the key resistance of $126K would confirm the bullish trend and could lead to a rapid move higher.
 
 2. **Long Volatility Protection** (Risk Management)
    - VIX calls, BTC straddles, QQQ put spreads
@@ -458,8 +931,8 @@ This is the central hub for our integrated investment and trading system. This d
 
 ### 🎬 ACTION PLAN SYNTHESIS
 
-**This Week (Oct 1-7)**
-1. Monitor Bitcoin H4 liquidity sweep setup at $111-112K (Trader Mayne)
+**This Week (Oct 7-14)**
+1. Monitor BTC Breakout Above $126K
 2. Initiate long vol positions (VIX calls, BTC straddles) - insurance at multi-year lows
 3. Review SPX 6,720 breakout attempt vs 6,612 support test
 4. Track government shutdown developments and data release delays
@@ -499,7 +972,7 @@ This is the central hub for our integrated investment and trading system. This d
 - [ ] **Options Chain Analysis**: Integrate real-time Greeks and OI data
 - [ ] **Economic Indicator Integration**: Connect macro data to business cycle analysis
 
-## Market Sentiment Alignment (2025-10-01) - UPDATED WITH LIVE DATA
+## Market Sentiment Alignment (2025-10-07) - UPDATED WITH LIVE DATA
 
 ### Convictions (Consensus Views)
 - "Uptober" narrative underway - Fear & Greed V-shaped recovery (28→50) marks resilience, seasonal tailwinds
@@ -628,7 +1101,7 @@ We use a comprehensive 100-point scoring system for investment evaluation:
 
 ## Action Items
 
-### Completed (Oct 1, 2025)
+### Completed (Oct 7, 2025)
 - ✅ **OCTOBER 1 MARKET INTELLIGENCE UPDATE**: Synthesized multi-provider consensus and divergences
 - ✅ **Updated Eagle Eye Macro Overview** with critical Oct 1 signals (labor collapse, perpetuals revolution, breadth divergence)
 - ✅ **Identified high-conviction trades** for Oct positioning (H4 liquidity sweep, long vol, Bitcoin DeFi)
@@ -660,7 +1133,7 @@ We use a comprehensive 100-point scoring system for investment evaluation:
 - ✅ **Integrated performance tracking** for all strategies and timeframes
 - ✅ **Cross-system analysis protocols** for maximum synergy benefits
 
-### Next Steps (Priority Queue - UPDATED OCT 1)
+### Next Steps (Priority Queue - UPDATED OCT 7)
 - [ ] **IMMEDIATE (This Week)**: Monitor BTC H4 liquidity sweep $111-112K, initiate long vol positions
 - [ ] **URGENT (Next 7 days)**: Track SPX 6,720 breakout vs 6,612 support, government shutdown impact
 - [ ] **HIGH (Next 14 days)**: Build Bitcoin DeFi protocol watchlist (organic TVL focus)
@@ -671,12 +1144,10 @@ We use a comprehensive 100-point scoring system for investment evaluation:
 - [ ] **Quarterly**: Reassess Oct 1 scenarios (Uptober rally vs breadth correction)
 
 ---
-*Last Updated: October 1, 2025 - COMPREHENSIVE OCTOBER 1 MARKET INTELLIGENCE UPDATE*
-*Next Review: October 7, 2025 (Weekly tactical review)*
-*System Version: 3.2 - October 1 Market Sentiment Integration*
-*Major Update: Integrated Oct 1 consolidated overview with critical divergences (breadth, labor, volatility)*
-
-
+*Last Updated: October 7, 2025 - COMPREHENSIVE OCTOBER 7 MARKET INTELLIGENCE UPDATE*
+*Next Review: October 14, 2025 (Weekly tactical review)*
+*System Version: 3.3 - October 7 Market Sentiment Integration*
+*Major Update: Integrated Oct 7 consolidated overview with critical divergences (breadth, labor, volatility)*
 
 
 

@@ -1319,6 +1319,105 @@
             padding: 25px;
             margin-bottom: 30px;
         }
+
+        /* Options Intelligence Styles */
+        .options-intelligence-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(26, 31, 58, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .options-key-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .options-metric-card {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .options-metric-label {
+            font-size: 0.85em;
+            color: #9ca3af;
+            margin-bottom: 5px;
+        }
+
+        .options-metric-value {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #c4b5fd;
+        }
+
+        .options-key-levels-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        .options-key-levels-table th,
+        .options-key-levels-table td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .options-key-levels-table th {
+            color: #9ca3af;
+            font-size: 0.85em;
+        }
+
+        .options-key-levels-table td {
+            color: #e0e6f0;
+            font-weight: 500;
+        }
+
+        .options-key-levels-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .options-volume-flow-card {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .options-volume-flow-bar-container {
+            display: flex;
+            height: 30px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .options-volume-flow-calls {
+            background: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .options-volume-flow-puts {
+            background: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
     </style>
 </head>
 <body data-plan="./master-plan.md">
@@ -1428,7 +1527,7 @@
             renderSentimentCards(dashboard.sentimentCards || []);
             renderAllocation(dashboard.allocation || {});
             renderMetrics(dashboard.metrics || []);
-            renderProviderTabs(dashboard.tabs || [], dashboard.dailyPlanner, dashboard.endOfDay);
+            renderProviderTabs(dashboard.tabs || [], dashboard.dailyPlanner, dashboard.endOfDay, dashboard);
 
             // Render integrated Risk & Divergence Monitor
             renderRiskAndDivergenceMonitor(dashboard.riskItems || [], dashboard.divergenceAlerts || []);
@@ -1896,49 +1995,10 @@
             }
         }
 
-        function renderCloseProbability(probabilityData) {
-            if (!probabilityData) return '';
-            
-            let spyHtml = '';
-            if (probabilityData.SPY) {
-                const spy = probabilityData.SPY;
-                spyHtml = `
-                    <div class="close-probability-card">
-                        <h3 class="section-title" style="font-size: 1.2em;">SPY End-of-Day Close Probability</h3>
-                        <p><strong>Model:</strong> ${spy.model || 'N/A'}</p>
-                        <p><strong>Prob. Close > ${spy.strike_above || 'N/A'}:</strong> ${spy.prob_above || 'N/A'}</p>
-                        <p><strong>Prob. Close < ${spy.strike_below || 'N/A'}:</strong> ${spy.prob_below || 'N/A'}</p>
-                        <p style="font-size: 0.8em; color: #9ca3af; margin-top: 10px;"><em>Last Updated: ${spy.lastUpdated || 'N/A'}</em></p>
-                    </div>
-                `;
-            }
-            // Similar block for QQQ would go here if data existed
-            
-            return spyHtml;
-        }
 
-        function renderCloseProbability(probabilityData) {
-            if (!probabilityData) return '';
-            
-            let spyHtml = '';
-            if (probabilityData.SPY) {
-                const spy = probabilityData.SPY;
-                spyHtml = `
-                    <div class="close-probability-card">
-                        <h3 class="section-title" style="font-size: 1.2em;">SPY End-of-Day Close Probability</h3>
-                        <p><strong>Model:</strong> ${spy.model || 'N/A'}</p>
-                        <p><strong>Prob. Close > ${spy.strike_above || 'N/A'}:</strong> ${spy.prob_above || 'N/A'}</p>
-                        <p><strong>Prob. Close < ${spy.strike_below || 'N/A'}:</strong> ${spy.prob_below || 'N/A'}</p>
-                        <p style="font-size: 0.8em; color: #9ca3af; margin-top: 10px;"><em>Last Updated: ${spy.lastUpdated || 'N/A'}</em></p>
-                    </div>
-                `;
-            }
-            // Similar block for QQQ would go here if data existed
-            
-            return spyHtml;
-        }
 
-        function renderProviderTabs(tabs, dailyPlanner, endOfDay) {
+
+        function renderProviderTabs(tabs, dailyPlanner, endOfDay, dashboard) {
             const tabsContainer = document.getElementById('provider-tabs');
             const contentsContainer = document.getElementById('provider-contents');
             if (!tabsContainer || !contentsContainer) {
@@ -2007,7 +2067,111 @@
 
                     // Render Close Probability for technicals tab
                     if (tab.id === 'technicals' && tab.closeProbability) {
-                        content.innerHTML += renderCloseProbability(tab.closeProbability);
+                        const normalizedCP = normalizeCloseProbability(tab.closeProbability.SPY);
+                        
+                        // Add ticker, current, changeFromOpen, lastUpdate, compositeSignal, confidence
+                        // These fields are not part of the core normalization but are needed for rendering
+                        normalizedCP.ticker = 'SPY';
+                        normalizedCP.current = dashboard.metrics?.find(m => m.label === 'SPY Current')?.value ?? '—';
+                        normalizedCP.changeFromOpen = ''; // This needs to be filled if tracked
+                        normalizedCP.lastUpdate = normalizedCP.lastUpdate || new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                        normalizedCP.compositeSignal = normalizedCP.compositeSignal || { color: '#8b5cf6', label: 'NEUTRAL', score: 50 };
+                        normalizedCP.confidence = normalizedCP.confidence || 'MEDIUM';
+
+                        content.appendChild(renderCloseProbability(normalizedCP));
+                    }
+
+                    // Render Options Intelligence (integrated into Technicals tab)
+                    if (tab.optionsData) {
+                        const optionsData = tab.optionsData;
+                        const optionsSection = document.createElement('div');
+                        optionsSection.className = 'options-intelligence-section';
+
+
+
+                        // Key Metrics Grid
+                        if (optionsData.SPY) {
+                            const spyData = optionsData.SPY;
+                            const metricsGrid = document.createElement('div');
+                            metricsGrid.className = 'options-key-metrics-grid';
+
+                            const maxPainCard = document.createElement('div');
+                            maxPainCard.className = 'options-metric-card';
+                            maxPainCard.innerHTML = `
+                                <div class="options-metric-label">Max Pain</div>
+                                <div class="options-metric-value">${spyData.maxPain || 'N/A'}</div>
+                            `;
+                            metricsGrid.appendChild(maxPainCard);
+
+                            const pcrCard = document.createElement('div');
+                            pcrCard.className = 'options-metric-card';
+                            pcrCard.innerHTML = `
+                                <div class="options-metric-label">Put/Call Ratio</div>
+                                <div class="options-metric-value">${spyData.putCallRatio || 'N/A'}</div>
+                            `;
+                            metricsGrid.appendChild(pcrCard);
+
+                            const ivCard = document.createElement('div');
+                            ivCard.className = 'options-metric-card';
+                            ivCard.innerHTML = `
+                                <div class="options-metric-label">IV Percentile</div>
+                                <div class="options-metric-value">${spyData.ivPercentile || 'N/A'}</div>
+                            `;
+                            metricsGrid.appendChild(ivCard);
+
+                            optionsSection.appendChild(metricsGrid);
+
+                            // Key Levels Table
+                            if (spyData.keyLevels && spyData.keyLevels.length > 0) {
+                                const levelsTable = document.createElement('table');
+                                levelsTable.className = 'options-key-levels-table';
+                                levelsTable.innerHTML = `
+                                    <thead>
+                                        <tr>
+                                            <th>Strike</th>
+                                            <th>Type</th>
+                                            <th>Gamma</th>
+                                            <th>Open Interest</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${spyData.keyLevels.map(level => `
+                                            <tr>
+                                                <td>${level.strike}</td>
+                                                <td>${level.type}</td>
+                                                <td>${level.gamma}</td>
+                                                <td>${level.oi}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                `;
+                                optionsSection.appendChild(levelsTable);
+                            }
+
+                            // Volume Flow Card
+                            if (spyData.volumeFlow) {
+                                const volumeFlowCard = document.createElement('div');
+                                volumeFlowCard.className = 'options-volume-flow-card';
+                                volumeFlowCard.innerHTML = `
+                                    <h4 style="color: #e0e6f0; margin-bottom: 10px;">Volume Flow</h4>
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.9em; color: #9ca3af;">
+                                        <span>Calls: ${spyData.volumeFlow.calls || 'N/A'}</span>
+                                        <span>Puts: ${spyData.volumeFlow.puts || 'N/A'}</span>
+                                        <span>Net Premium: ${spyData.volumeFlow.premium || 'N/A'}</span>
+                                    </div>
+                                    <div class="options-volume-flow-bar-container">
+                                        <div class="options-volume-flow-calls" style="width: ${parseInt(spyData.volumeFlow.calls) || 0}%;">
+                                            ${parseInt(spyData.volumeFlow.calls) > 5 ? spyData.volumeFlow.calls : ''}
+                                        </div>
+                                        <div class="options-volume-flow-puts" style="width: ${parseInt(spyData.volumeFlow.puts) || 0}%;">
+                                            ${parseInt(spyData.volumeFlow.puts) > 5 ? spyData.volumeFlow.puts : ''}
+                                        </div>
+                                    </div>
+                                `;
+                                optionsSection.appendChild(volumeFlowCard);
+                            }
+                        }
+                        content.appendChild(optionsSection);
                     }
 
                     // Render provider insights with enhanced visual design
@@ -3383,6 +3547,21 @@
             return timeInMinutes >= 720;
         }
 
+        function normalizeCloseProbability(cp) {
+          if (!cp || !cp.probabilities) {
+            return { probabilities: { higher: 0, flat: 0, lower: 0 }, keyLevels: {}, factors: [] };
+          }
+          return {
+            probabilities: {
+              higher: cp.probabilities.higher ?? 0,
+              flat: cp.probabilities.flat ?? 0,
+              lower: cp.probabilities.lower ?? 0
+            },
+            keyLevels: cp.keyLevels || {},
+            factors: cp.factors || []
+          };
+        }
+
         function renderCloseProbability(probabilityData) {
             const section = document.createElement('div');
             section.className = 'close-probability-section';
@@ -3553,6 +3732,8 @@
                     section.appendChild(factorDiv);
                 });
             }
+
+
 
             // Composite signal
             const composite = document.createElement('div');
@@ -4118,40 +4299,33 @@
             return container;
         }
 
+
+
         function renderAIInterpretation(interpretation) {
-            if (!interpretation) return '';
+  if (!interpretation) return '';
+  const updatedAt = interpretation.updatedAt
+    ? `<div class=\"ai-updated\"><span>🕒</span><span class=\"ai-updated-value\">${interpretation.updatedAt}</span></div>`
+    : `<div class=\"ai-updated\"><span>🕒</span><span class=\"ai-updated-value\">N/A</span></div>`;
+  const sentimentText  = interpretation.sentiment  || 'Neutral';
+  const confidenceText = interpretation.confidence || 'Medium';
+  const sentimentClass  = `sentiment-${sentimentText.toLowerCase().replace(/\s+/g, '-')}`;
+  const confidenceClass = `confidence-${confidenceText.toLowerCase()}`;
+  return `
+    <div class=\"ai-interpretation\">
+      <div class=\"ai-badge\">
+        <span class=\"${sentimentClass}\">${sentimentText}</span>
+        <span class=\"${confidenceClass}\">${confidenceText.toUpperCase()}</span>
+        ${updatedAt}
+      </div>
+      <div class=\"ai-body\">
+        ${interpretation.keyInsight ? `<div class=\\\"ai-key-insight\\\"><strong>Key Insight:</strong> ${interpretation.keyInsight}</div>` : ''}
+        ${interpretation.summary ? `<div class=\\\"ai-summary\\\">${interpretation.summary}</div>` : ''}
+        ${interpretation.action ? `<div class=\\\"ai-action\\\"><strong>Action:</strong> ${interpretation.action}</div>` : ''}
+      </div>
+    </div>
+  `;
+}
 
-            const sentimentClass = `sentiment-${interpretation.sentiment.toLowerCase().replace(/\s+/g, '-')}`;
-            const confidenceClass = `confidence-${interpretation.confidence.toLowerCase()}`;
-
-            return `
-                <div class="ai-interpretation">
-                    <div class="ai-badge">
-                        <span>🤖</span>
-                        <span>AI INTERPRETATION</span>
-                    </div>
-                    <div class="ai-summary">${interpretation.summary}</div>
-                    <div class="ai-key-insight">
-                        <div class="ai-key-insight-label">💡 Key Insight</div>
-                        <div class="ai-key-insight-text">${interpretation.keyInsight}</div>
-                    </div>
-                    <div class="ai-action">
-                        <div class="ai-action-icon">⚡</div>
-                        <div class="ai-action-text"><strong>Action:</strong> ${interpretation.action}</div>
-                    </div>
-                    <div class="ai-meta">
-                        <div class="ai-sentiment">
-                            <span style="color: #9ca3af;">Sentiment:</span>
-                            <span class="ai-sentiment-value ${sentimentClass}">${interpretation.sentiment.charAt(0).toUpperCase() + interpretation.sentiment.slice(1)}</span>
-                        </div>
-                        <div class="ai-confidence">
-                            <span style="color: #9ca3af;">Confidence:</span>
-                            <span class="ai-confidence-value ${confidenceClass}">${interpretation.confidence.charAt(0).toUpperCase() + interpretation.confidence.slice(1)}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
 
         function getProviderEmoji(providerName) {
             const emojiMap = {
@@ -4204,34 +4378,55 @@
 
 
 
-<!-- Patch: define normalizeCloseProbability and guard Technicals rendering -->
+<!-- Patch: cache-bust master-plan fetch for GH Pages -->
 <script>
 (function(){
-  if (window.__normalizeClosePPatched) return;
-  window.__normalizeClosePPatched = true;
+  if (window.__planCacheBustPatched) return;
+  window.__planCacheBustPatched = true;
+  document.addEventListener('DOMContentLoaded', function(){
+    try {
+      const body = document.body;
+      const base = body && body.getAttribute('data-plan');
+      if (!base) return;
+      const cb = 'v=' + (new Date()).toISOString().slice(0,19).replace(/[-:T]/g,'');
+      const url = base.includes('?') ? (base + '&' + cb) : (base + '?' + cb);
+      window.__cacheBustedPlanUrl = url;
+    } catch(e){ console.error(e); }
+  });
+})();
+</script>
 
-  if (typeof window.normalizeCloseProbability !== 'function') {
-    window.normalizeCloseProbability = function(raw) {
-      if (!raw) return { probabilities: { higher:0, flat:0, lower:0 }, keyLevels: {}, factors: [] };
-      const higher = raw.probabilities && Number.isFinite(+raw.probabilities.higher) ? +raw.probabilities.higher
-                    : parseInt((raw.prob_above||'').toString().replace('%','')) || 0;
-      const lower  = raw.probabilities && Number.isFinite(+raw.probabilities.lower) ? +raw.probabilities.lower
-                    : parseInt((raw.prob_below||'').toString().replace('%','')) || 0;
-      const flat   = raw.probabilities && Number.isFinite(+raw.probabilities.flat) ? +raw.probabilities.flat
-                    : Math.max(0, 100 - higher - lower);
+
+
+<!-- Patch: robust normalizeCloseProbability -->
+<script>
+(function(){
+  if (window.__normalizeCPPGlobal) return;
+  window.__normalizeCPPGlobal = true;
+  window.normalizeCloseProbability = function(raw){
+    try{
+      if(!raw){
+        return { ticker:'SPY', lastUpdate:'N/A', probabilities:{higher:0,flat:0,lower:0},
+                 keyLevels:{}, factors:[], compositeSignal:{color:'#8b5cf6',label:'NEUTRAL',score:50}, confidence:'MEDIUM' };
+      }
+      const p = raw.probabilities || {};
+      const higher = Number.isFinite(+p.higher) ? +p.higher : parseInt(String(raw.prob_above||'').replace('%','')) || 0;
+      const lower  = Number.isFinite(+p.lower)  ? +p.lower  : parseInt(String(raw.prob_below||'').replace('%','')) || 0;
+      const flat   = Number.isFinite(+p.flat)   ? +p.flat   : Math.max(0, 100 - higher - lower);
       return {
-        ticker: 'SPY',
-        current: raw.current || '—',
-        changeFromOpen: raw.changeFromOpen || '',
+        ticker: raw.ticker || 'SPY',
         lastUpdate: raw.lastUpdated || 'N/A',
         probabilities: { higher, flat, lower },
         keyLevels: raw.keyLevels || {},
-        factors: raw.factors || [],
-        compositeSignal: raw.compositeSignal || { color: '#8b5cf6', label: 'NEUTRAL', score: 50 },
+        factors: Array.isArray(raw.factors) ? raw.factors : [],
+        compositeSignal: raw.compositeSignal || { color:'#8b5cf6', label:'NEUTRAL', score:50 },
         confidence: raw.confidence || 'MEDIUM'
       };
-    };
-  }
+    }catch(e){
+      console.error('normalizeCloseProbability error', e);
+      return { ticker:'SPY', lastUpdate:'N/A', probabilities:{higher:0,flat:0,lower:0}, keyLevels:{}, factors:[], compositeSignal:{color:'#8b5cf6',label:'NEUTRAL',score:50}, confidence:'MEDIUM' };
+    }
+  };
 })();
 </script>
 
